@@ -3,38 +3,28 @@
  */
 
 var pattern = /(([0-9])|([0-1][0-9])|([2][0-3])):(([0-9])|([0-5][0-9]))/;
-var commentsList = [];
-var videoId = "wEPQ3bV6vEI";
-$(document).ready(function () {
+var videoId = "HxXbrnJ6l4A";
+//$(document).ready(function () {
+//
+//});
 
+function loadAjax(pageToken) {
     $.ajax({
+        async: "false",
         url: "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBAcQUU5I4FElmsYVK0irkDPVGQ_OLLkO0&" +
-        "textFormat=plainText&part=snippet&videoId="+videoId+"&maxResults=100"
-    }).then(function (data) {
-
+        "textFormat=plainText&part=snippet&videoId=" + videoId + "&maxResults=100&pageToken=" + pageToken
+    }).success(function (data) {
         storeCommentsList(data);
-        var nextPageToken = data.nextPageToken;
-        if(nextPageToken != null){
-            $.ajax({
-                url: "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBAcQUU5I4FElmsYVK0irkDPVGQ_OLLkO0&" +
-                "textFormat=plainText&part=snippet&videoId="+videoId+"&maxResults=100&nextPageToken="+nextPageToken
-            }).then(function (nextData) {
-                storeCommentsList(nextData);
-                nextPageToken = nextData.nextPageToken;
-            });
+        nextPageToken = data.nextPageToken;
+        console.log(nextPageToken);
+        if (nextPageToken != null) {
+            loadAjax(nextPageToken);
         }
-        var inHTML = "";
-
-        $.each(commentsList, function (index, value) {
-            var newItem = "<tr><td>" + value.authorDisplayName + "</td></tr>"
-            inHTML += newItem;
-        });
-
-        $("table#dynamicTable").html(inHTML);
     });
-});
+}
 
-var storeCommentsList = function(data) {
+var storeCommentsList = function (data) {
+    var commentsList = [];
     for (i = 0; i < data.items.length; i++) {
         var currentItem = data.items[i];
         var commentText = currentItem.snippet.topLevelComment.snippet.textDisplay;
@@ -54,4 +44,5 @@ var storeCommentsList = function(data) {
             commentsList.push(comment);
         }
     }
-}
+    show_cmts(commentsList);
+};
