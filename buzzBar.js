@@ -1,4 +1,3 @@
-//$(document).ready(function () {
 function load_cmts() {
     comments = [{
         id: 1,
@@ -48,6 +47,4 @@ window.setInterval(function () {
         timeloc = (100 * player.getCurrentTime() / vid_Dur) + 0.3
     }
     $("#slider").css("width", timeloc + "%");
-    //console.log(100 * player.getCurrentTime() / vid_Dur);
 }, 100);
-//});
