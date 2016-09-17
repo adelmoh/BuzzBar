@@ -32,7 +32,7 @@ function load_cmts() {
             },
             position: {
                 my: 'center left',
-                at: 'center right',
+                at: 'bottom right',
                 target: 'event'
             },
             style: {
