@@ -6,7 +6,7 @@ function load_cmts() {
         authorDisplayName: "user1",
         authorProfileImageUrl: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=28",
         authorChannelUrl: "http://www.youtube.com/channel/UCqDi1QGD-rJD-3uolZZYyFw",
-        textDisplay: "good moment!"
+        textDisplay: "look at this moment!"
     }, {
         id: 2,
         time: "5:50",
@@ -21,23 +21,33 @@ function load_cmts() {
         minutes = parseInt(comment['time'].split(":")[0], 10);
         seconds = parseInt(comment['time'].split(":")[1], 10);
         commSec = minutes * 60 + seconds;
-        loc = Math.floor($(window).width()*commSec / vid_Dur);
+        loc = Math.floor($(window).width() * commSec / vid_Dur);
         //alert(loc);
         $('<div id="cmt_' + comment['id'] + '" class="cmtLoc" style="left: ' + loc + 'px"><a></a></href></div>').insertAfter("#slider");
-        $("#cmt_"+comment['id']).css("background-image", 'url("'+ comment['authorProfileImageUrl'] + '")');
-        $("#cmt_"+comment['id'] + ">a").attr("href", comment['authorChannelUrl']);
-        $("#cmt_"+comment['id']).qtip({
+        $("#cmt_" + comment['id']).css("background-image", 'url("' + comment['authorProfileImageUrl'] + '")');
+        $("#cmt_" + comment['id'] + ">a").attr("href", comment['authorChannelUrl']);
+        $("#cmt_" + comment['id']).qtip({
             content: {
                 text: comment['authorDisplayName'] + ": " + comment['textDisplay']
+            },
+            position: {
+                my: 'center left',
+                at: 'center right',
+                target: 'event'
+            },
+            style: {
+                classes: 'qtip-light qtip-shadow qtip-rounded myblue'
             }
-            //,
-            //style: {
-            //    tip: {
-            //        corner: true
-            //    }
-            //}
         });
 
     }
 }
+window.setInterval(function () {
+    timeloc = 0;
+    if (player.getCurrentTime() > 0) {
+        timeloc = (100 * player.getCurrentTime() / vid_Dur) + 0.7
+    }
+    $("#slider").css("width", timeloc + "%");
+    console.log(100 * player.getCurrentTime() / vid_Dur);
+}, 100);
 //});

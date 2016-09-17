@@ -29,18 +29,21 @@ function onPlayerReady(event) {
     event.target.playVideo();
     vid_Dur = event.target.getDuration();
     //alert(vid_Dur);
+    play = true;
     load_cmts();
 }
 
 // 5. The API calls this function when the player's state changes.
 //    The function indicates that when playing a video (state=1),
 //    the player should play for six seconds and then stop.
-var done = false;
+var play = false;
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
+    if (event.data == YT.PlayerState.PLAYING && play) {
+        //setTimeout(stopVideo, 6000);
+        //done = true;
+
     }
+    //$("#slider").css("width", (100*event.target.getCurrentTime() / vid_Dur) + 0.7 + "%");
 }
 function stopVideo() {
     player.stopVideo();
