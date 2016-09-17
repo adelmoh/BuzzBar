@@ -45,7 +45,7 @@ function load_cmts() {
 window.setInterval(function () {
     timeloc = 0;
     if (player.getCurrentTime() > 0) {
-        timeloc = (100 * player.getCurrentTime() / vid_Dur) + 0.7
+        timeloc = (100 * player.getCurrentTime() / vid_Dur) + 0.3
     }
     $("#slider").css("width", timeloc + "%");
     //console.log(100 * player.getCurrentTime() / vid_Dur);
