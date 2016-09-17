@@ -13,8 +13,14 @@ $(document).ready(function() {
             var currentItem = data.items[i];
             var commentText = currentItem.snippet.topLevelComment.snippet.textDisplay;
             if(pattern.test(commentText)) {
+                var startIndex = commentText.search(pattern);
+                var stringThatHasTime = commentText.substr(startIndex);
                 var comment = new Object();
                 comment.id = currentItem.id;
+                if(stringThatHasTime.search(':') == 2)
+                    comment.time = stringThatHasTime.substr(0,5);
+                else
+                    comment.time = stringThatHasTime.substr(0,4);
                 comment.textDisplay = currentItem.snippet.topLevelComment.snippet.textDisplay;
                 comment.authorDisplayName = currentItem.snippet.topLevelComment.snippet.authorDisplayName;
                 comment.authorProfileImageUrl = currentItem.snippet.topLevelComment.snippet.authorProfileImageUrl;
