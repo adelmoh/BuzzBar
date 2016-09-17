@@ -1,21 +1,43 @@
-$comments = [{
-    time: "1:20",
-    authorDisplayName: "user1",
-    authorProfileImageUrl: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=10",
-    authorChannelUrl: "http://www.youtube.com/channel/UCqDi1QGD-rJD-3uolZZYyFw",
-    textDisplay: "good moment!"
-}, {
-    time: "1:50",
-    authorDisplayName: "user1",
-    authorProfileImageUrl: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=10",
-    authorChannelUrl: "http://www.youtube.com/channel/UCqDi1QGD-rJD-3uolZZYyFw",
-    textDisplay: "good moment!"
-}];
+//$(document).ready(function () {
+function load_cmts() {
+    comments = [{
+        id: 1,
+        time: "8:20",
+        authorDisplayName: "user1",
+        authorProfileImageUrl: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=28",
+        authorChannelUrl: "http://www.youtube.com/channel/UCqDi1QGD-rJD-3uolZZYyFw",
+        textDisplay: "good moment!"
+    }, {
+        id: 2,
+        time: "5:50",
+        authorDisplayName: "user1",
+        authorProfileImageUrl: "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=28",
+        authorChannelUrl: "http://www.youtube.com/channel/UCqDi1QGD-rJD-3uolZZYyFw",
+        textDisplay: "good moment!"
+    }];
+    var arrayLength = comments.length;
+    for (var i = 0; i < arrayLength; i++) {
+        comment = comments[i];
+        minutes = parseInt(comment['time'].split(":")[0], 10);
+        seconds = parseInt(comment['time'].split(":")[1], 10);
+        commSec = minutes * 60 + seconds;
+        loc = Math.floor($(window).width()*commSec / vid_Dur);
+        //alert(loc);
+        $('<div id="cmt_' + comment['id'] + '" class="cmtLoc" style="left: ' + loc + 'px"><a></a></href></div>').insertAfter("#slider");
+        $("#cmt_"+comment['id']).css("background-image", 'url("'+ comment['authorProfileImageUrl'] + '")');
+        $("#cmt_"+comment['id'] + ">a").attr("href", comment['authorChannelUrl']);
+        $("#cmt_"+comment['id']).qtip({
+            content: {
+                text: comment['authorDisplayName'] + ": " + comment['textDisplay']
+            }
+            //,
+            //style: {
+            //    tip: {
+            //        corner: true
+            //    }
+            //}
+        });
 
-$comments.each(function (idx, cmt) {
-    $comment = $(cmt);
-    minutes = parseInt($comment['time'].split(":")[0], 10);
-    seconds = parseInt($comment['time'].split(":")[1], 10);
-    alert(minutes * 60 + seconds);
-    // and the rest of your code
-});
+    }
+}
+//});

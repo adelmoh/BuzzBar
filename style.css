@@ -1,0 +1,19 @@
+.bar {
+    position: absolute;
+    width: 100%;
+    height: 3%;
+    top: 80%;
+    background: #555;
+}
+.cmtLoc {
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    top: 80%;
+}
+
+#slider {
+    display: block;
+    background-color: red;
+    overflow: hidden;
+}
