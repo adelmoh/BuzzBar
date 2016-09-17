@@ -4,9 +4,8 @@
 
 var pattern = /(([0-9])|([0-1][0-9])|([2][0-3])):(([0-9])|([0-5][0-9]))/;
 var commentsList = [];
-var videoId = "wEPQ3bV6vEI";
+var videoId = getParameterByName('videoId');
 $(document).ready(function () {
-
     $.ajax({
         url: "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBAcQUU5I4FElmsYVK0irkDPVGQ_OLLkO0&" +
         "textFormat=plainText&part=snippet&videoId="+videoId+"&maxResults=100"
@@ -54,4 +53,14 @@ var storeCommentsList = function(data) {
             commentsList.push(comment);
         }
     }
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }

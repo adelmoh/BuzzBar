@@ -1,29 +1,19 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Enter URL</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
     <script src="enterUrl.js"></script>
-    <script src="myScript.js"></script>
-    <script src="playerScript.js"></script>
-    <script src="buzzBar.js"></script>
 </head>
-<title>BuzzBar</title>
-
 <body>
-
-<div id="player"></div>
-<div class="bar" id="buzzbar">
-</div>
-<div class="bar " id="slider" style="width: 0%"></div>
-<!--<span class="cmtLoc"></span>-->
-<div>
-    <table id="dynamicTable">
-    </table>
-</div>
-
+Please enter ID of the youtube video:
+<br/>
+<input id="inputText" type="text" size="140"/>
+<input type="submit" align="right" onclick="enterURL()">
+<!--<a href="homePage.html?"+$('#inputText').val()>submit</a>-->
 </body>
-
-
 </html>
