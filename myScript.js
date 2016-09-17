@@ -3,6 +3,7 @@
  */
 $(document).ready(function() {
 
+    var pattern = /(([0-9])|([0-1][0-9])|([2][0-3])):(([0-9])|([0-5][0-9]))/;
     var commentsList = [];
     $.ajax({
         url: "https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyBAcQUU5I4FElmsYVK0irkDPVGQ_OLLkO0&" +
@@ -10,12 +11,16 @@ $(document).ready(function() {
     }).then(function(data) {
         for (i = 0; i < data.items.length; i++) {
             var currentItem = data.items[i];
-            var comment = new Object();
-            comment.textDisplay = currentItem.snippet.topLevelComment.snippet.textDisplay;
-            comment.authorDisplayName = currentItem.snippet.topLevelComment.snippet.authorDisplayName;
-            comment.authorProfileImageUrl = currentItem.snippet.topLevelComment.snippet.authorProfileImageUrl;
-            comment.authorChannelUrl = currentItem.snippet.topLevelComment.snippet.authorChannelUrl;
-            commentsList.push(comment);
+            var commentText = currentItem.snippet.topLevelComment.snippet.textDisplay;
+            if(pattern.test(commentText)) {
+                var comment = new Object();
+                comment.id = currentItem.id;
+                comment.textDisplay = currentItem.snippet.topLevelComment.snippet.textDisplay;
+                comment.authorDisplayName = currentItem.snippet.topLevelComment.snippet.authorDisplayName;
+                comment.authorProfileImageUrl = currentItem.snippet.topLevelComment.snippet.authorProfileImageUrl;
+                comment.authorChannelUrl = currentItem.snippet.topLevelComment.snippet.authorChannelUrl;
+                commentsList.push(comment);
+            }
         }
 
         var inHTML = "";
