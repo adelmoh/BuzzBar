@@ -2,18 +2,22 @@
     position: absolute;
     width: 100%;
     height: 3%;
-    top: 80%;
+    top: 83%;
     background: darkgrey;
 }
 .cmtLoc {
     position: absolute;
     height: 28px;
     width: 28px;
-    top: 80%;
+    top: 83%;
 }
 
 #slider {
     display: block;
     background-color: #555;
     overflow: hidden;
+}
+
+.qtip-content {
+    font-size:14px;
 }

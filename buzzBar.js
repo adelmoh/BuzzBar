@@ -23,7 +23,7 @@ function show_cmts(comments) {
         loc = Math.floor($(window).width() * commSec / vid_Dur);
         $('<a target="_blank"><div id="cmt_' + comment['id'] + '" class="cmtLoc" style="left: ' + loc + 'px"></div></a>').insertAfter("#slider");
         $("#cmt_" + comment['id']).css("background-image", 'url("' + comment['authorProfileImageUrl'].replace("sz=50","sz=28") + '")');
-        $("#cmt_" + comment['id']).parent().attr("href", comment['authorChannelUrl']);
+        //$("#cmt_" + comment['id']).parent().attr("href", comment['authorChannelUrl']);
         $("#cmt_" + comment['id']).qtip({
             content: {
                 text: comment['authorDisplayName'] + ": " + comment['textDisplay']
@@ -31,10 +31,11 @@ function show_cmts(comments) {
             position: {
                 my: 'center left',
                 at: 'bottom right',
-                target: 'event'
+                target: 'event',
+                adjust: {x:0, y:10}
             },
             style: {
-                classes: 'qtip-light qtip-shadow qtip-rounded myblue'
+                classes: 'qtip-dark qtip-shadow qtip-rounded myblue'
             }
         });
 

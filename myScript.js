@@ -3,10 +3,10 @@
  */
 
 var pattern = /(([0-9])|([0-1][0-9])|([2][0-3])):(([0-9])|([0-5][0-9]))/;
-var videoId = "HxXbrnJ6l4A";
-//$(document).ready(function () {
-//
-//});
+var videoId = getParameterByName('videoId');
+if (videoId == null) {
+    videoId = "HxXbrnJ6l4A";
+}
 
 function loadAjax(pageToken) {
     $.ajax({
@@ -45,4 +45,23 @@ var storeCommentsList = function (data) {
         }
     }
     show_cmts(commentsList);
+};
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var enterURL = function () {
+    var videoUrl = $('#inputText').val();
+    var videoId = videoUrl;
+    if (videoUrl.toLowerCase().indexOf("youtube") >= 0){
+        videoId = getParameterByName("v", videoUrl);
+    }
+    window.location.href = "index.html?videoId=" + videoId;
 };
