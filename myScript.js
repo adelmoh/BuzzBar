@@ -63,5 +63,5 @@ var enterURL = function () {
     if (videoUrl.toLowerCase().indexOf("youtube") >= 0){
         videoId = getParameterByName("v", videoUrl);
     }
-    window.location.href = "index.html?videoId=" + videoId;
+    window.location.href = "player.html?videoId=" + videoId;
 };
